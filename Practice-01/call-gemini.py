@@ -2,27 +2,22 @@
 # Make sure to install the Google GenAI client library first:
 # pip install google-genai
 
-#import google.generativeai as genai
-
-
-
-# model = genai.GenerativeModel("gemini-1.5-pro")
-# response = model.generate_content(
-#     "What is the capital of France?",
-#     generation_config={
-#         "temperature": 0.5,
-#         "max_output_tokens": 50
-#     }
-# )
-
 from google import genai
 
-my_api_key="your actual API key"  # Replace with your actual API key
-print(my_api_key)
-print("Calling Gemini API... my api kye is: ", my_api_key)
+def get_api_key():
+    # This function should return your actual API key.
+    # For security reasons, do not hardcode your API key in the script.
+    # Instead, consider using environment variables or a secure vault, or put it in secure file
+    # Open the file in read mode
+    with open('gemini_api_key.txt', 'r') as file:
+         contents = file.read()
+    return contents  # Replace with your actual API key
+
+my_api_key= get_api_key() # Replace with your actual API key
+
 client = genai.Client(api_key=my_api_key)
 
 response = client.models.generate_content(
-    model="gemini-2.0-flash", contents="Explain how AI works in a few words"
+    model="gemini-2.0-flash", contents="Explain how AI works in a simple way."
 )
 print(response.text)
